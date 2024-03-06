@@ -1,19 +1,18 @@
 # RTLF - R-Time-Leak-Finder
 
-[TODO - Introduce RTLF]
+RTLF is a new tool for evaluating whether two distributions differ.
 
 **Please note:**  RTLF is a research tool intended for developers, pentesters, administrators and researchers. There is no GUI.
 
 Dependencies
 --
 To use RTLF, it is necessary to have *R* (https://www.r-project.org/) and the *tidyverse* (https://www.tidyverse.org/) library installed.
-Running
 
 Usage
 --
 In order to run RTLF, you need to execute the *R* file:
 ```
-Rscript RTLF.R
+Rscript RTLF.R <input_file> <output_file>
 ```
 
 Docker
@@ -21,14 +20,12 @@ Docker
 We provide a Dockerfile, allowing you to run RTLF directly:
 ```
 docker build -t rtlf .
-docker run rtlf <input_file> <output_file>
+docker run -v <source>:<target> rtlf <input_file> <output_file>
 ```
 
-Input File
+Input File - Requirements
 --
-[TODO - Introduce BASELINE and MODIFIED]
-
-The input file must have a specific format. The input should be structured as follows: 
+The input file must have be a *CSV* that follows to a specific format. The file should be structured as follows: 
 ```
 V1,V2
 BASELINE,494602
@@ -38,8 +35,18 @@ MODIFIED,539770
 ...
 ```
 
-Output File
+Output File - Format
 --
-[TODO - Explain out file in more detail]
-
-RTLF outputs a *RDATA* file. It contains a list with five entries.  
+The output file is an *RDATA* file that contains a list with five entries. The output looks like this, for example:
+```
+[[1]]
+[1] 0 0 0 0 0 0 0 0 0
+[[2]]
+[1] 12 10 14 18 26 34 12 32 54
+[[3]]
+[1]  34.0  25.0  24.0  26.0  32.5  48.0  72.0 197.0 139.0
+[[4]]
+[1]  32  25  20  24  32  46  72 197 139
+[[5]]
+[1]  34.0  22.0  24.0  26.0  32.5  48.0  58.0 178.0 119.0
+```
