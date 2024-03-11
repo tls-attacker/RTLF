@@ -1,6 +1,6 @@
 # RTLF - R-Time-Leak-Finder
 
-RTLF is a new tool to statistically evaluate timing measurements with a type-1 error bounded by an input parameter $\alpha$.
+RTLF is a new tool to statistically evaluate timing measurements with a type-1 error bounded by an input parameter $\alpha$. Details on RTLF can be found on our [paper](https://www.usenix.org/conference/usenixsecurity24/presentation/dunsche), which we published at USENIX Security 2024.
 
 **Please note:**  RTLF is a research tool intended for developers, pentesters, administrators and researchers. There is no GUI.
 
@@ -36,10 +36,11 @@ MODIFIED,531296
 MODIFIED,539770
 ...
 ```
+*BASELINE* describes the first series of measurements, and *MODIFIED* represents the second series. Both are compared to each other.
 
 Output File - Format
 --
-The output file is an *RDATA* file that contains a list with five entries. The output looks like this, for example:
+The output file is an *RDATA* file that contains a list with five entries. If the first row contains a *1*, RTLF has detected a difference in the measurement series. The output looks like this, for example:
 ```
 [[1]]
 [1] 0 0 0 0 0 0 0 0 0
