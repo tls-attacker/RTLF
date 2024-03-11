@@ -1,6 +1,6 @@
 # RTLF - R-Time-Leak-Finder
 
-RTLF is a new tool for evaluating whether two distributions differ.
+RTLF is a new tool to statistically evaluate timing measurements with a type-1 error bounded by an input parameter $\alpha$.
 
 **Please note:**  RTLF is a research tool intended for developers, pentesters, administrators and researchers. There is no GUI.
 
@@ -12,7 +12,7 @@ Usage
 --
 In order to run RTLF, you need to execute the *R* file:
 ```
-Rscript RTLF.R <input_file> <output_file>
+Rscript <script_name> <input_file> <output_file>
 ```
 
 Docker
@@ -22,6 +22,8 @@ We provide a Dockerfile, allowing you to run RTLF directly:
 docker build -t rtlf .
 docker run -v <source>:<target> rtlf <input_file> <output_file>
 ```
+
+**Please note:**  The Dockerfile sets the version with $\alpha=0.09$ as the entry point. If you want to use other versions, adapt the entry point.
 
 Input File - Requirements
 --
