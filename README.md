@@ -36,7 +36,7 @@ Y,531296
 Y,539770
 ...
 ```
-*X* describes the first series of measurements, and *Y* represents the second series. Both are compared to each other.
+*X* describes the first series of measurements, and *Y* represents the second series. Both are compared to each other. The measurements of *X* and *Y* do not have to be listed as separate blocks.
 
 CLI Output
 --
@@ -46,7 +46,7 @@ Note that the *tidyverse* library may print some debugging info to console about
 
 Output File - Format And Interpretation
 --
-The output file is an *RDATA* file that contains a list with five entries. If the first row contains a *1*, RTLF has detected a difference in the measurement series. You can inspect the RDATA using R-Studio or simply using R (or RScript) like this:
+The output file is an *RDATA* file that contains a list with five vectors. You can inspect the RDATA using R-Studio or simply using R (or RScript) like this:
 ```
 load("[FILE_PATH].RDATA", data <- new.env())
 data[["output"]]
