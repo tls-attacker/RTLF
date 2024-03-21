@@ -12,8 +12,9 @@ Usage
 --
 In order to run RTLF, you need to execute the *R* file:
 ```
-Rscript <script_name> <input_file> <output_file>
+Rscript <script_name> <alpha> <input_file> <output_file>
 ```
+Where *alpha* defines the threshold for the type-1 error rate. $\alpha$ = 0.09 would result in a threshold of 9%.
 
 Docker
 --
@@ -22,8 +23,6 @@ We provide a Dockerfile, allowing you to run RTLF directly:
 docker build -t rtlf .
 docker run -v <source>:<target> rtlf <input_file> <output_file>
 ```
-
-**Please note:**  The Dockerfile sets the version with $\alpha=0.09$ as the entry point. If you want to use other versions, adapt the entry point.
 
 Input File - Requirements
 --
