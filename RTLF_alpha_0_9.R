@@ -7,7 +7,7 @@ args <- commandArgs(trailingOnly = TRUE)
 inputFile <- toString(args[1], width = NULL)
 outputFile <- toString(args[2], width = NULL)
 data <- read.csv(file = inputFile)
-namedData <- data %>% mutate(V1 = recode(V1, "BASELINE" = "1"))  %>%  mutate(V1 = recode(V1, "MODIFIED" = "2"))
+namedData <- data %>% mutate(V1 = recode(V1, "X" = "1"))  %>%  mutate(V1 = recode(V1, "Y" = "2"))
 n <- min(length((namedData %>% select(V1, V2) %>% filter(V1 == "1"))$V2), length((namedData %>% select(V1, V2) %>% filter(V1 == "2"))$V2))
 B <- 10000
 
@@ -49,3 +49,12 @@ bootstrap1 <- function(dat, n) {
 
 output <- autotest(namedData, n, B)
 save(output, file = outputFile)
+if(max(output[[1]]) > 0) {
+  indices <- which(output[[1]] > 0)
+  cli_message <- paste0("Test determined difference for the following quantile indices: ", paste(indices, collapse=", "), ".")
+  print(cli_message)
+  quit(status = 11) # test determined difference
+}else{
+  print("Test determined no difference.")
+  quit(status = 10) # test determined no difference
+}
