@@ -21,7 +21,7 @@ Docker
 We provide a Dockerfile, allowing you to run RTLF directly:
 ```
 docker build -t rtlf .
-docker run -v <source>:<target> rtlf <input_file> <output_file>
+docker run -v <source>:<target> rtlf <alpha> <input_file> <output_file>
 ```
 
 Input File - Requirements
