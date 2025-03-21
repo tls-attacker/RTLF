@@ -458,12 +458,12 @@ autotest <- function(data, n, B, alpha_per_decile) {
   bb2 <- data %>% select(V1, V2) %>% filter(V1 == "2")
   
   # Ensure we have enough data to proceed
-  if (length(bb1$V2) < 1 || length(bb2$V2) < 1) {
+  if (length(bb1$V2) < 100 || length(bb2$V2) < 100) {
     stop("Insufficient data after filtering empty/zero values. Need at least one data point per series.")
   }
   
   # Make sure n is at least 1
-  n <- max(1, n)
+  n <- max(100, n)
   
   # Replicate bootstrap B times
   q1 <- replicate(B, bootstrap1(as.numeric(bb1$V2), n))
