@@ -101,15 +101,24 @@ list_files_in_dir <- function(dir_path, pattern, recursive = FALSE) {
     stop("Directory does not exist: ", dir_path)
   }
   
+  # Convert pattern to handle glob-style patterns better
+  clean_pattern <- pattern
+  if (grepl("\\*", pattern)) {
+    # Keep the pattern as-is for list.files
+  } else {
+    clean_pattern <- paste0(".*", pattern, ".*")
+  }
+  
   # Use recursive flag if specified
   files <- list.files(
     path = dir_path, 
-    pattern = pattern, 
+    pattern = clean_pattern, 
     full.names = TRUE, 
-    recursive = recursive
+    recursive = recursive,
+    include.dirs = FALSE  # Exclude directories from results
   )
   
-  # Filter out directories from the results
+  # Additional check to filter out directories (in case include.dirs doesn't work as expected)
   files <- files[!file.info(files)$isdir]
   
   if (length(files) == 0) {
@@ -149,12 +158,7 @@ if (is_input_dir) {
     # This ensures results won't be saved unless explicitly requested
   }
   
-  # Fix file pattern - remove any extra spaces
-  # Convert pattern to a proper regex for file.info filtering
-  clean_pattern <- gsub("\\*", ".*", opt$pattern)
-  clean_pattern <- gsub("\\.", "\\\\.", clean_pattern)
-  
-  # Filter out any non-CSV files and RDATA result files
+  # Filter out any RDATA result files
   input_files <- input_files[!grepl("\\.RDATA$", input_files)]
   
   # Display information about files to process
